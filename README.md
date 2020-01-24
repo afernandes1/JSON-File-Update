@@ -1,6 +1,6 @@
 # JSON-File-Update
 
-For a given JSON file I was asked to update one of the fields with information retrieved from another .csv file. This has to be done for all entries in the file, around 120 times.
+For a given JSON file I was asked to update one of the fields with information retrieved from another .csv file. This has to be done for all entries in the file, around 120 times. The IP Addresses are the only field in common between the two files - .csv and JSON.
 
 Every IP Address from the .csv file has an unique ID, and that ID needs to be populated into the JSON file. The two files don't have the same number of IP Addresses nor these are in the same order so will need to match the IP Addresses from both files.
 
