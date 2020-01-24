@@ -1,13 +1,4 @@
-#-------------------------------------------------------------------------------
-# Name:        JSON file update
-# Purpose:
-#
-# Author:      afernandes
-#
-# Created:     20/01/2020
-# Copyright:   (c) afernandes 2020
-# Licence:     <your licence>
-#-------------------------------------------------------------------------------
+
 import csv
 
 # Starts here:
