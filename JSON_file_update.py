@@ -10,6 +10,53 @@
 #-------------------------------------------------------------------------------
 import csv
 
+# Starts here:
+#
+#
+# Calls csvfile function and save information into variable
+from_csv = []
+from_csv = csvfile()
+
+# Calls jsonfile function and save information into variable
+from_json1 = jsonfile()
+
+csv_tmsID = []
+csv_IP = []
+for csv_item1 in from_csv:
+    csv_tmsID.append(csv_item1[0])                  # creates a list of the TMSId from the CSV File - this value will replace the TMSId on the JSON file
+    csv_IP.append(csv_item1[1])                     # creates a list of the IP Addresses from the CSV File
+
+
+to_csv= []
+for each_tt1 in from_json1:
+    eachtt2 = each_tt1[1].split("\"")               # creates a list of IP Addresses from JSON file by the order they are on the original file
+    to_csv.append(eachtt2[3])                       #
+
+final_list = []
+
+for values in to_csv:                               # reads every IP Address from JSON File
+    #print(values)
+    if any(values in s for s in csv_IP):            # if any IP Address from JSON file is also inside the CSV File then:
+        csvIndex = csv_IP.index(values)             # gets the table index of the IP Address of CSV File
+        #print(csvIndex)
+        deviceID = csv_tmsID[csvIndex]              # the TMSId from CSV File will have the same table index as the IP Address of CSV File so here we are getting the TMSId
+        #print(values + "  " + deviceID)
+        #print(values)
+        new_value = "            \"TMSId\": " + deviceID + ","      # we will use that TMSId from CSV File to create the new line to replace in the JSON file
+        old_value = "            \"TMSId\": 0,"                     # original line on JSON File
+        #print(new_value)
+
+        with open(r'C:\TMS Export\config.json', 'r') as file:  # opens original JSON file again as read
+
+            newText = file.read().replace(old_value, new_value, 1)  # finds the FIRST MATCH ONLY and replace the "old_value" with "new_value"
+            output = file.read()                                    # when the FOR loop comes here next time, the FIRST MATCH will be the next one as this one has been changec
+
+
+        with open(r'C:\TMS Export\config.json', "w") as f:     # opens JSON File as writable and saves the new configuration with the variable created above
+            f.write(newText)
+            output = f.close()
+
+            
 # Fuction opens CSV file to read all the content and save it to a variable
 def csvfile():
 
@@ -53,7 +100,7 @@ def jsonfile():
 
         return added
 
-        for something in added:
+        for something in added:                             # not necessary but can be used to clean up the data
             abc = something[-1:]
             zxc = something[:-1]
             #print(zxc)
@@ -69,56 +116,6 @@ def jsonfile():
 
             for qwer in zxc:
                 tmsids = qwer[21:]
-
-
-from_csv = []
-
-# Starts here:
-#
-#
-# Calls csvfile function and save information into variable
-from_csv = csvfile()
-
-# Calls jsonfile function and save information into variable
-from_json1 = jsonfile()
-
-
-
-csv_tmsID = []
-csv_IP = []
-for csv_item1 in from_csv:
-    csv_tmsID.append(csv_item1[0])                  # creates a list of the TMSId from the CSV File - this value will replace the TMSId on the JSON file
-    csv_IP.append(csv_item1[1])                     # creates a list of the IP Addresses from the CSV File
-
-
-to_csv= []
-for each_tt1 in from_json1:
-    eachtt2 = each_tt1[1].split("\"")               # creates a list of IP Addresses from JSON file by the order they are on the original file
-    to_csv.append(eachtt2[3])                       #
-
-final_list = []
-
-for values in to_csv:                               # reads every IP Address from JSON File
-    #print(values)
-    if any(values in s for s in csv_IP):            # if any IP Address from JSON file is also inside the CSV File then:
-        csvIndex = csv_IP.index(values)             # gets the table index of the IP Address of CSV File
-        #print(csvIndex)
-        deviceID = csv_tmsID[csvIndex]              # the TMSId from CSV File will have the same table index as the IP Address of CSV File so here we are getting the TMSId
-        #print(values + "  " + deviceID)
-        #print(values)
-        new_value = "            \"TMSId\": " + deviceID + ","      # we will use that TMSId from CSV File to create the new line to replace in the JSON file
-        old_value = "            \"TMSId\": 0,"                     # original line on JSON File
-        #print(new_value)
-
-        with open(r'C:\TMS Export\config.json', 'r') as file:  # opens original JSON file again as read
-
-            newText = file.read().replace(old_value, new_value, 1)  # finds the FIRST MATCH ONLY and replace the "old_value" with "new_value"
-            output = file.read()                                    # when the FOR loop comes here next time, the FIRST MATCH will be the next one as this one has been changec
-
-
-        with open(r'C:\TMS Export\config.json', "w") as f:     # opens JSON File as writable and saves the new configuration with the variable created above
-            f.write(newText)
-            output = f.close()
 
 
 
