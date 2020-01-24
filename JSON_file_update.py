@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Name:        Synergy_TMS_update
+# Name:        JSON file update
 # Purpose:
 #
 # Author:      afernandes
