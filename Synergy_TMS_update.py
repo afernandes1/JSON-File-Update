@@ -73,13 +73,13 @@ def jsonfile():
 
 from_csv = []
 
-#Starts here:
+# Starts here:
 #
 #
-#Step 1 - Calls csvfile function and save information into variable
+# Calls csvfile function and save information into variable
 from_csv = csvfile()
 
-#Step 2 - Call jsonfile function and save information into variable
+# Calls jsonfile function and save information into variable
 from_json1 = jsonfile()
 
 
